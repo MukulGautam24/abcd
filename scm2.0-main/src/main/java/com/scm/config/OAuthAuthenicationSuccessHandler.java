@@ -64,12 +64,12 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
             // google
             // google attributes
 
-            user.setEmail(oauthUser.getAttribute("").toString());
-            user.setProfilePic(oauthUser.getAttribute("\"C:\\Users\\HP\\Pictures\\Camera Roll\\WIN_20211007_15_36_08_Pro.jpg\"").toString());
-            user.setName(oauthUser.getAttribute("").toString());
+            user.setEmail(oauthUser.getAttribute("email").toString());
+            user.setProfilePic(oauthUser.getAttribute("picture").toString());
+            user.setName(oauthUser.getAttribute("name").toString());
             user.setProviderUserId(oauthUser.getName());
             user.setProvider(Providers.GOOGLE);
-            user.setAbout("");
+            user.setAbout("This account is created using google.");
 
         } else if (authorizedClientRegistrationId.equalsIgnoreCase("github")) {
 
@@ -77,7 +77,7 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
             // github attributes
             String email = oauthUser.getAttribute("email") != null ? oauthUser.getAttribute("email").toString()
                     : oauthUser.getAttribute("login").toString() + "@gmail.com";
-            String picture = oauthUser.getAttribute("").toString();
+            String picture = oauthUser.getAttribute("avatar_url").toString();
             String name = oauthUser.getAttribute("login").toString();
             String providerUserId = oauthUser.getName();
 

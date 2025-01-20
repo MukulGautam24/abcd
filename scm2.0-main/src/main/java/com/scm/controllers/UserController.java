@@ -35,7 +35,7 @@ public class UserController {
 
     @RequestMapping(value = "/feedback")
     public String userfeedback() {
-        System.out.println("User feedback");
+        // System.out.println("User feedback");
         return "user/feedback";
     }
 
