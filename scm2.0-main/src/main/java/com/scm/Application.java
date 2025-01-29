@@ -4,16 +4,20 @@ package com.scm;
 import com.scm.entities.User;
 import com.scm.helpers.AppConstants;
 import com.scm.repsitories.UserRepo;
+
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.UUID;
 
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class Application  implements CommandLineRunner {
 
 	public static void main(String[] args) {

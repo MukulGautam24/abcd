@@ -1,5 +1,6 @@
 package com.scm.entities;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,6 +29,7 @@ public class Contact {
     private String name;
     private String email;
     private String phoneNumber;
+    private LocalDateTime creationTime;
     private String address;
     private String picture;
     @Column(length = 1000)
@@ -43,5 +45,10 @@ public class Contact {
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<SocialLink> links = new ArrayList<>();
+
+    //This provides the creation time of the contact
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
 
 }

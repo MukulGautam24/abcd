@@ -21,18 +21,22 @@ public class ContactServiceImpl implements ContactService
     @Autowired
     private ContactRepo contactRepo;
 
+
     @Override
     public Contact save(Contact contact) {
 
         String contactId = UUID.randomUUID().toString();
         contact.setId(contactId);
         return contactRepo.save(contact);
-
+        
     }
+
+    
 
     @Override
     public Contact update(Contact contact) {
 
+        //Optional is a container object which may or may not contain a non-null value and it is used here.
         var contactOld = contactRepo.findById(contact.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found"));
         contactOld.setName(contact.getName());
