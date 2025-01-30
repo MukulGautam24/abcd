@@ -26,6 +26,12 @@ public interface ContactService {
                 .collect(Collectors.toList());
     }
 
+    // Private method for testing (Java 9+)
+    private boolean isContactValid(Contact contact) {
+        // Your validation logic here.  Example:
+        return contact != null && contact.getName() != null && !contact.getName().isEmpty();
+    }
+
 
     // Get contacts whose name starts with 'M' using Streams API
     default List<Contact> getContactsStartingWithM(List<Contact> contacts) {
