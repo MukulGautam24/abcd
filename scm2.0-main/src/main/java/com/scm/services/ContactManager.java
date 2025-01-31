@@ -1,19 +1,19 @@
 package com.scm.services;
 
-import java.util.List;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.scm.entities.Contact;
-
-import java.util.HashMap;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.apache.commons.lang3.tuple.Pair; 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.scm.entities.Contact; 
 
 public class ContactManager {
 
@@ -121,6 +121,30 @@ public class ContactManager {
             .forEach((var c) -> System.out.println(c.getName())); 
     }
 
+    //Switch Expressions for Java 12
+    // public String getContactType(Contact contact) {
+    //     return switch (contact.getType()) {
+    //         case "PERSONAL" -> "Personal";
+    //         case "WORK" -> "Work";
+    //         case "OTHER" -> "Other";
+    //         default -> "Unknown";
+    //     };
+    // }
+
+    //Text Blocks for Java 13
+    String emailTemplate = """
+    <html>
+        <body>
+            <h1>Hello, ${contact.name}</h1>
+            <p>...</p>
+        </body>
+    </html>
+    """;
+
+    String sql = """
+    INSERT INTO contacts (name, email, phone)
+    VALUES ('${contact.name}', '${contact.email}', '${contact.phone}');
+    """;
 
 
 
