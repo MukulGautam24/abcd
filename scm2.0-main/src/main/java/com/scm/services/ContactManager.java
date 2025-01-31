@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nimbusds.openid.connect.sdk.assurance.evidences.Organization;
 import com.scm.entities.Contact; 
 
 public class ContactManager {
@@ -179,6 +180,18 @@ public class ContactManager {
     // It would be illegal to create a new class that extends Contact 
     // unless it is explicitly permitted by the Sealed Classes declaration.
 
+
+    //Java 17 introduced enhanced switch expressions with pattern matching
+    public String getContactType(Object obj) {
+        return switch (obj) {
+            case Person person -> "Person";
+            case Company company -> "Company";
+            case Organization organization -> "Organization";
+            default -> "Unknown";
+        };
+    }
+
+    
 
 
 
