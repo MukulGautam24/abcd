@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.SequencedCollection;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -235,6 +236,44 @@ public class ContactManager {
     //     }
     // }
 
+    // java 20 introduced scoped values for thread-local values
+
+    // Define a Scoped Value for the currently logged-in user
+    // ScopedValue<User> currentUser = ScopedValue.of(User.class);
+
+    // Within a method that requires the current user:
+    // User user = currentUser.get(); 
+
+    // ... use the user object to perform actions ... 
+
+    // Example of setting the current user within a scope:
+    // try (Scope scope = Scope.open()) {
+    //     currentUser.set(loggedInUser); 
+        // ... perform operations that require the current user ...
+    // } 
+
+    // The currentUser value is automatically cleared when the scope is closed.
+
+    //java 20 introduced pattern matching for switch expressions
+    // public String getContactType(Object obj) {
+    //     return switch (obj) {
+    //         case Person(String name, String email, _) -> "Person"; 
+    //         case Company(String name, String address, _) -> "Company"; 
+    //         default -> "Unknown";
+    //     };
+    // }
+
+
+
+    //java 21 introduced sequenced collections for deterministic iteration order
+    // SequencedCollection<Contact> contacts = // ... obtain a sequenced collection ...
+
+    // for (Contact contact : contacts) { 
+    //     // Process contacts in the guaranteed order 
+    // }
+
+
+    
 
 
 }
