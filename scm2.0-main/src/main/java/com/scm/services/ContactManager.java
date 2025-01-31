@@ -28,7 +28,7 @@ public class ContactManager {
         var contactsByCity = new HashMap<String, List<Contact>>(); // Type inferred
 
         for (var contact : contacts) { // Type inferred as Contact
-            contactNames.add(contact.getName());
+            // contactNames.add(contact.getName());
             // ... other processing ...
         }
 
@@ -40,14 +40,14 @@ public class ContactManager {
         var complexMap = new HashMap<String, List<Pair<Integer, Contact>>>(); // Inferred
 
         // Example with streams:
-        var gmailContacts = contacts.stream()
-                .filter(c -> c.getEmail().endsWith("@gmail.com"))
-                .collect(Collectors.toList()); // Type is List<Contact>
+        // var gmailContacts = contacts.stream()
+        //         .filter(c -> c.getEmail().endsWith("@gmail.com"))
+        //         .collect(Collectors.toList()); // Type is List<Contact>
 
         // Example with Optional:
         var id = 1; // Example id, replace with actual logic to get id
         Optional<Contact> optionalContact = getContactById(id); // Type is Optional<Contact> if getContactById returns Optional<Contact>
-        optionalContact.ifPresent(c -> System.out.println(c.getName()));
+        // optionalContact.ifPresent(c -> System.out.println(c.getName()));
     }
 
     // Method to get contact by id
@@ -113,13 +113,13 @@ public class ContactManager {
 
 
     //We can use var in lambda expressions for dealing with complex types
-    private List<Contact> contacts = new ArrayList<>(); 
+    // private List<Contact> contacts = new ArrayList<>(); 
 
-    public void printGmailContacts() {
-        contacts.stream()
-            .filter((var c) -> c.getEmail().endsWith("@gmail.com")) 
-            .forEach((var c) -> System.out.println(c.getName())); 
-    }
+    // public void printGmailContacts() {
+        // contacts.stream()
+            // .filter((var c) -> c.getEmail().endsWith("@gmail.com")) 
+            // .forEach((var c) -> System.out.println(c.getName())); 
+    // }
 
     //Switch Expressions for Java 12
     // public String getContactType(Contact contact) {
@@ -132,19 +132,54 @@ public class ContactManager {
     // }
 
     //Text Blocks for Java 13
-    String emailTemplate = """
-    <html>
-        <body>
-            <h1>Hello, ${contact.name}</h1>
-            <p>...</p>
-        </body>
-    </html>
-    """;
+    // String emailTemplate = """
+    // <html>
+    //     <body>
+    //         <h1>Hello, ${contact.name}</h1>
+    //         <p>...</p>
+    //     </body>
+    // </html>
+    // """;
 
-    String sql = """
-    INSERT INTO contacts (name, email, phone)
-    VALUES ('${contact.name}', '${contact.email}', '${contact.phone}');
-    """;
+    // String sql = """
+    // INSERT INTO contacts (name, email, phone)
+    // VALUES ('${contact.name}', '${contact.email}', '${contact.phone}');
+    // """;
+
+
+    //Record Classes for Java 14
+    // public record Contact(String name, String email, String phone) {} 
+
+//    In your ContactManager class:
+//      public void addContact(Contact contact) {
+//      logic to add contact to the database ....
+//    }
+
+    // Example method to demonstrate pattern matching for instanceof
+    public void checkInstance(Object object) {
+        if (object instanceof Contact contact) { 
+            // Access contact fields directly:
+            // System.out.println("Contact Name: " + contact.getName()); 
+        }
+    }
+
+    //Sealed Classes for Java 15
+    public sealed class Contact permits Person, Company { 
+        // ... Contact class definition ...
+    }
+    
+    public final class Person extends Contact { 
+        // ... Person class definition ...
+    }
+    
+    public final class Company extends Contact { 
+        // ... Company class definition ...
+    }
+    
+    // It would be illegal to create a new class that extends Contact 
+    // unless it is explicitly permitted by the Sealed Classes declaration.
+
+
 
 
 
