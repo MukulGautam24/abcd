@@ -1,6 +1,8 @@
 package com.scm.services;
 
 import java.util.List;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,6 +10,9 @@ import java.util.stream.Collectors;
 import com.scm.entities.Contact;
 
 import java.util.HashMap;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import org.apache.commons.lang3.tuple.Pair; 
 
 public class ContactManager {
@@ -53,4 +58,70 @@ public class ContactManager {
     }
 
     // ... other methods ...
+
+
+    //New String methods for Java 11 
+
+    public void validateContactInfo() {
+        String name = "   ";
+        if (name.isBlank()) {
+            System.out.println("Name is blank"); 
+        }
+
+        String phoneNumber = "123-456-7890";
+        if (!phoneNumber.isBlank()) {
+            // Validate phone number format
+        }
+    }
+
+    public void printAddressLines() {
+        String address = "123 Main St\nAnytown, CA 91234";
+        address.lines().forEach(System.out::println);
+
+        List<String> addressLines = address.lines().collect(Collectors.toList());
+    }
+
+    public void printTextExamples() {
+        String text = "  Hello World! \u2005  ";
+        String strippedText = text.strip();
+        System.out.println(strippedText); 
+
+        String trimmedText = text.trim();
+        System.out.println(trimmedText); 
+    }
+
+    public void printRepeatedGreeting() {
+        String greeting = "Hello";
+        String repeatedGreeting = greeting.repeat(3);
+        System.out.println(repeatedGreeting); 
+    }
+
+    //New HttpClient usage as Http/2 or websocket for Java 11
+
+    public String fetchContactDetails(String url) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
+        } else {
+            throw new IOException("HTTP request failed: " + response.statusCode());
+        }
+    }
+
+
+    //We can use var in lambda expressions for dealing with complex types
+    private List<Contact> contacts = new ArrayList<>(); 
+
+    public void printGmailContacts() {
+        contacts.stream()
+            .filter((var c) -> c.getEmail().endsWith("@gmail.com")) 
+            .forEach((var c) -> System.out.println(c.getName())); 
+    }
+
+
+
+
 }
