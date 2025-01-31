@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -191,8 +195,45 @@ public class ContactManager {
         };
     }
 
-    
 
+
+    //java 19 introduced virtual threads for lightweight concurrency
+    // public void processContactsConcurrently() {
+    //     ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor(); 
+
+    //     List<Contact> contacts = getContacts(); 
+    //     for (Contact contact : contacts) {
+    //         executor.submit(() -> { 
+    //             // Process contact asynchronously 
+    //             // (e.g., update contact data, send notifications)
+    //         });
+    //     }
+
+    //     executor.shutdown(); 
+    //     executor.awaitTermination(1, TimeUnit.MINUTES); 
+    // }
+
+    //java 19 introduced enhanced switch expressions with pattern matching
+    // public String getContactName(Object obj) {
+    //     return switch (obj) {
+    //         case Contact(String name, _) -> name; 
+    //         case Company(String name, _) -> name; 
+    //         default -> "Unknown";
+    //     };
+    // }
+
+    //java 19 introduced enhanced switch expressions with pattern matching
+    // public void processContactsWithStructuredConcurrency() {
+    //     try (var scope = Scope.launch()) { 
+    //         List<CompletableFuture<Void>> futures = new ArrayList<>();
+    //         for (Contact contact : getContacts()) {
+    //             futures.add(scope.fork(() -> { 
+    //                 // Process contact asynchronously 
+    //             }));
+    //         }
+    //         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join(); 
+    //     }
+    // }
 
 
 
